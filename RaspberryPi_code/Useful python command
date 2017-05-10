@@ -1,0 +1,6 @@
+#check running python script
+ps aux | grep python
+
+#kill python command
+#replace "water_system" to your python script name
+ps aux  |  grep -i water_system  |  awk '{print $2}'  |  xargs sudo kill -9
