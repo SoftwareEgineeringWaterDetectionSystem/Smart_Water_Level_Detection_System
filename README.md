@@ -3,3 +3,9 @@
 10/5/2017
 As for now, RaspberryPi manage to send data to the database already
 Django still need to finnd the way to communicate between the database and django
+
+
+lets aim to finished it...
+
+WE CAN DO IT!!!!! 
+GAMBATEEEE
