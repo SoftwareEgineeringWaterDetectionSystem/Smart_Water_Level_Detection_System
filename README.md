@@ -8,4 +8,4 @@ Django still need to finnd the way to communicate between the database and djang
 lets aim to finished it...
 
 WE CAN DO IT!!!!! 
-GAMBATEEEE
+GAMBATTTTEEE
