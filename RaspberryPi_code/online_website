@@ -2,3 +2,11 @@ online website that need to be used
 
 http://2c4b28df.ngrok.io/<file.php>
 refer list of PHP for the file.php
+
+
+water_system.php - run water_system.py script
+kill.php  - kill water script
+start_pump.php  - run start_pump.py script, ovrride water_system for manually controlled pump
+killpump.php  - kill pump script
+cleanup.php - run cleanup.py script, cleanup rpi gpio
+killclean. - clean cleanup script
