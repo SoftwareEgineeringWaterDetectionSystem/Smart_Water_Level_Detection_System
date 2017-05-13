@@ -6,13 +6,13 @@ $sql = "SELECT * FROM `water_level` WHERE now_date = CURDATE()";
 
 $result = mysqli_query($con, $sql);
 
-$response = array();
-
-while($row = mysqli_fetch_array($result)){
-	$response = array("now_date"=>$row[1],"now_time"=>$row[2],"level"=>$row[3]);
-        echo json_encode(array($response));
-
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo '[{"date":"' . $row["now_date"]. '","level":"' . $row["level"]. '"'. "}]\r\n";
+        
+    }
+} else {
+    echo "0 results";
 }
-
-
 ?>
