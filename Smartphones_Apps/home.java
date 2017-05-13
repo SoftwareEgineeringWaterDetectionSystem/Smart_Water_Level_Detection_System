@@ -4,6 +4,7 @@ import android.R;
 import android.content.Context;
 import android.content.Intent;
 import android.app.Activity;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -25,9 +26,6 @@ public class home extends Activity {
     Context ctx=this;
     String DATES = null, TIMES = null, LEVEL = null;
     String name, password, email, dates, times, level, Err;
-    String Name, Password, Email;
-    //String names = "Nizam";
-    //String passwords = "testmy";
 
 
     TextView nameTV, emailTV, passwordTV, datesTV, timesTV, levelTV, err;
@@ -55,9 +53,9 @@ public class home extends Activity {
         times = intent.getStringExtra("times");
         level = intent.getStringExtra("level");
 
-        nameTV.setText("Welcome " + name);
-        passwordTV.setText("Your password is " + password);
-        emailTV.setText("Your email is " + email);
+        nameTV.setText("WELCOME");
+        passwordTV.setText("WATER LEVEL SYSTEM");
+        emailTV.setText("MKEL 1243 SOFTWARE ENG");
         err.setText(Err);
 
         datesTV.setText("Date: " + dates);
@@ -68,7 +66,11 @@ public class home extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ret_data();
+
+                home.BackGround b = new home.BackGround();
+
+                b.execute(dates, times, level);
+
             }
         });
 
@@ -81,44 +83,87 @@ public class home extends Activity {
                 startActivity(i);
             }
         });
-    }
 
-    public void ret_data(){
-        Name = name.toString();
-        Password = password.toString();
-        Email = email.toString();
+        Button buttonOnSystem = (Button) findViewById(com.example.nano_android.R.id.home_on);
+        buttonOnSystem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg) {
 
-        System.out.println(Name);
-        System.out.println(Password);
-        System.out.println(Email);
-        home.BackGround b = new home.BackGround();
-        b.execute(Name, Password, Email);
+               Intent i2 = new Intent(ctx, home.class);
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://akuzul.pagekite.me/water_system.php"));
+                startActivity(i);
+                finish();
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+               finish();
+               startActivity(i2);
+
+            }
+
+        });
+
+
+        Button buttonPump = (Button) findViewById(com.example.nano_android.R.id.home_start);
+        buttonPump.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg) {
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://akuzul.pagekite.me/start_pump.php"));
+                startActivity(i);
+              finish();
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Intent i3 = new Intent(ctx, home.class);
+                startActivity(i3);
+
+            }
+        });
+
+        Button buttonStopSystem = (Button) findViewById(com.example.nano_android.R.id.home_stop);
+        buttonStopSystem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg) {
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://akuzul.pagekite.me/cleanup.php"));
+                startActivity(i);
+                finish();
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Intent i4 = new Intent(ctx, home.class);
+                startActivity(i4);
+            }
+        });
+
+
     }
 
     class BackGround extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String... params) {
-            String name = params[0];
-            String password = params[1];
-            String email = params[2];
-            System.out.println("lat");
             String data = "";
             int tmp;
             try {
                 URL url = new URL("https://softwareengineeing.000webhostapp.com/rpi_data_home.php");
                 String urlParams = "";
-                System.out.println("lat2");
+                System.out.println("debug2");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                System.out.println("lat3");
+                System.out.println("debug3");
                 httpURLConnection.setDoOutput(true);
-                System.out.println("lat4");
+                System.out.println("debug4");
                 OutputStream os = httpURLConnection.getOutputStream();
-                System.out.println("lat5");
+                System.out.println("debug5");
                 os.write(urlParams.getBytes());
-                System.out.println("lat6");
+                System.out.println("debug6");
                 os.flush();
-                System.out.println("lat7");
+                System.out.println("debug7");
                 os.close();
 
                 InputStream is = httpURLConnection.getInputStream();
@@ -147,11 +192,9 @@ public class home extends Activity {
                     i.putExtra("dates", DATES);
                     i.putExtra("times", TIMES);
                     i.putExtra("level", LEVEL);
-                    i.putExtra("name", name);
-                    i.putExtra("password", password);
-                    i.putExtra("email", email);
+                    System.out.println("debug9");
                     finish();
-                    startActivity(i);
+                   startActivity(i);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -168,7 +211,4 @@ public class home extends Activity {
 
     }
 
-    /////////////////////////////////////////////////////
-
-    //////////////////////////////////////////////////////////////
 }
