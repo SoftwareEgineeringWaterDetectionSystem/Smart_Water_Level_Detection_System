@@ -101,14 +101,14 @@ public class login extends Activity {
                     i.putExtra("password", PASSWORD);
                     i.putExtra("email", EMAIL);
                    // i.putExtra("err", err);
+                    finish();
                     startActivity(i);
 
+
                 }
-                if((!PASSWORD.equalsIgnoreCase(Password))){
+
+                else {
                     Intent i = new Intent(ctx, login.class);
-                    i.putExtra("name", Names );
-                    i.putExtra("password", Passwords );
-                    System.out.println("Im clear");
                     name.setText("");
                     password.setText("");
                     startActivity(i);
