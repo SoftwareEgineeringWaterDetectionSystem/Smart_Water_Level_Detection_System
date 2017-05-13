@@ -4,9 +4,6 @@ require "init_rpi.php";
 
 
 $sql = "SELECT * FROM `register_1` WHERE name='$_POST[name]' AND password='$_POST[password]'";
-
-
-
 $result = mysqli_query($con, $sql);
 
 $response = array();
