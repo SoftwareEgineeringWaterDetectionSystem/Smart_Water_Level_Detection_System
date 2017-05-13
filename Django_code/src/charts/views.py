@@ -46,13 +46,13 @@ class ChartData(APIView):
         """
     def get(self, request, format=None):
         qs_count = User.objects.all().count()
-        url = "http://softwareengineeringtwo.esy.es/test_atif.php"
-        x = urllib2.urlopen(url, timeout=None)
-        x = x.read()
-        file = open("database2.txt", "w+")
-        print >> file, x
+        url = "https://softwareengineeing.000webhostapp.com/read_water_level_daily.php"
+        phpcontent = urllib2.urlopen(url, timeout=None)
+        phpcontent = phpcontent.read()
+        file = open("database.txt", "w+")
+        print >> file, phpcontent
         file.close()
-        database = open("database2.txt", "r+")
+        database = open("database.txt", "r+")
         date_ = []
         levels = []
         for item in database:
