@@ -22,9 +22,10 @@ public class login extends Activity {
 
     EditText name, password;
     String Name, Password;
+    String Names = null, Passwords = null;
     Context ctx=this;
     String NAME=null, PASSWORD=null, EMAIL=null;
-    //String NAME="Jubur", PASSWORD="lembu", EMAIL="lat";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,8 +70,6 @@ public class login extends Activity {
                     data+= (char)tmp;
                 }
 
-                //System.out.println(data);
-
                 is.close();
                 httpURLConnection.disconnect();
 
@@ -95,25 +94,35 @@ public class login extends Activity {
                 PASSWORD = user_data.getString("password");
                 EMAIL = user_data.getString("email");
 
-            } catch (JSONException e) {
+                if ((PASSWORD.equalsIgnoreCase(Password)) && (NAME.equalsIgnoreCase(Name))){
+                    System.out.println("Im in");
+                    Intent i = new Intent(ctx, home.class);
+                    i.putExtra("name", NAME);
+                    i.putExtra("password", PASSWORD);
+                    i.putExtra("email", EMAIL);
+                   // i.putExtra("err", err);
+                    startActivity(i);
+
+                }
+                if((!PASSWORD.equalsIgnoreCase(Password))){
+                    Intent i = new Intent(ctx, login.class);
+                    i.putExtra("name", Names );
+                    i.putExtra("password", Passwords );
+                    System.out.println("Im clear");
+                    name.setText("");
+                    password.setText("");
+                    startActivity(i);
+                }
+
+            }catch (JSONException e) {
                 e.printStackTrace();
-                err = "Exception: "+e.getMessage();
+               //err = "Exception: "+e.getMessage();
             }
-            if (PASSWORD.equalsIgnoreCase(Password)){
-                Intent i = new Intent(ctx, home.class);
-                i.putExtra("name", NAME);
-                i.putExtra("password", PASSWORD);
-                i.putExtra("email", EMAIL);
-                i.putExtra("err", err);
-                startActivity(i);
-
-            } else {
-                Intent i = new Intent(ctx, login.class);
-                name.setText("");
-                password.setText("");
 
 
-            }
+
+
+
 
 
         }
