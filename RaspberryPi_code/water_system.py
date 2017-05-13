@@ -6,8 +6,8 @@ import requests
 from time import sleep
 GPIO.setmode(GPIO.BCM)
 
-urllib.urlopen('http://21716fb5.ngrok.io/killpump.php')
-urllib.urlopen('http://21716fb5.ngrok.io/killclean.php')
+urllib.urlopen('http://akuzul.pagekite.me/killpump.php')
+urllib.urlopen('http://akuzul.pagekite.me/killclean.php')
 try:
 	
         while 1:

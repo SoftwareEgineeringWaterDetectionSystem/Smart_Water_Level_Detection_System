@@ -6,9 +6,9 @@ from time import sleep
 GPIO.setmode(GPIO.BCM)
 
 try:
-	urllib.urlopen('http://21716fb5.ngrok.io/killclean.php')
+	urllib.urlopen('http://akuzul.pagekite.me/killclean.php')
         sleep(1)
-	urllib.urlopen('http://21716fb5.ngrok.io/kill.php')
+	urllib.urlopen('http://akuzul.pagekite.me/kill.php')
 	sleep(1)
 	while 1:   
             GPIO.setup(2, GPIO.OUT, initial=GPIO.LOW)
