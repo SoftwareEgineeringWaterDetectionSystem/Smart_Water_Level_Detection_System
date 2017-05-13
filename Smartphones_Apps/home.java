@@ -26,9 +26,10 @@ public class home extends Activity {
     Context ctx=this;
     String DATES = null, TIMES = null, LEVEL = null;
     String name, password, email, dates, times, level, Err;
+    String Name, Password, Email;
 
 
-    TextView nameTV, emailTV, passwordTV, datesTV, timesTV, levelTV, err;
+    TextView nameTV, emailTV, passwordTV, datesTV, timesTV, levelTV, err, wel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class home extends Activity {
         timesTV = (TextView) findViewById(com.example.nano_android.R.id.home_times);
         levelTV = (TextView) findViewById(com.example.nano_android.R.id.home_level);
         err = (TextView) findViewById(com.example.nano_android.R.id.err);
+        wel = (TextView) findViewById(com.example.nano_android.R.id.wel);
 
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
@@ -53,7 +55,8 @@ public class home extends Activity {
         times = intent.getStringExtra("times");
         level = intent.getStringExtra("level");
 
-        nameTV.setText("WELCOME");
+        wel.setText("WELCOME ");
+        nameTV.setText(""+name);
         passwordTV.setText("WATER LEVEL SYSTEM");
         emailTV.setText("MKEL 1243 SOFTWARE ENG");
         err.setText(Err);
@@ -66,10 +69,8 @@ public class home extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ret_data();
 
-                home.BackGround b = new home.BackGround();
-
-                b.execute(dates, times, level);
 
             }
         });
@@ -89,7 +90,7 @@ public class home extends Activity {
             @Override
             public void onClick(View arg) {
 
-               Intent i2 = new Intent(ctx, home.class);
+                Intent i2 = new Intent(ctx, home.class);
                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://akuzul.pagekite.me/water_system.php"));
                 startActivity(i);
                 finish();
@@ -98,8 +99,9 @@ public class home extends Activity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-               finish();
-               startActivity(i2);
+                finish();
+                startActivity(i2);
+                ret_data();
 
             }
 
@@ -112,7 +114,7 @@ public class home extends Activity {
             public void onClick(View arg) {
                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://akuzul.pagekite.me/start_pump.php"));
                 startActivity(i);
-              finish();
+                finish();
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
@@ -120,6 +122,7 @@ public class home extends Activity {
                 }
                 Intent i3 = new Intent(ctx, home.class);
                 startActivity(i3);
+                ret_data();
 
             }
         });
@@ -138,16 +141,33 @@ public class home extends Activity {
                 }
                 Intent i4 = new Intent(ctx, home.class);
                 startActivity(i4);
+                ret_data();
             }
         });
 
 
     }
 
+    public void ret_data(){
+        Name = name.toString();
+        Password = password.toString();
+        Email = email.toString();
+
+        System.out.println(Name);
+        System.out.println(Password);
+        System.out.println(Email);
+        home.BackGround b = new home.BackGround();
+        b.execute(Name, Password, Email);
+    }
+
     class BackGround extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String... params) {
+            String name = params[0];
+            String password = params[1];
+            String email = params[2];
+            System.out.println("debug");
             String data = "";
             int tmp;
             try {
@@ -193,8 +213,11 @@ public class home extends Activity {
                     i.putExtra("times", TIMES);
                     i.putExtra("level", LEVEL);
                     System.out.println("debug9");
+                    i.putExtra("name", name);
+                    i.putExtra("password", password);
+                    i.putExtra("email", email);
                     finish();
-                   startActivity(i);
+                    startActivity(i);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
