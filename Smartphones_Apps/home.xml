@@ -87,16 +87,6 @@
         android:text="Medium Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:id="@+id/home_name"
-        android:layout_below="@+id/textView_user"
-        android:layout_alignRight="@+id/textView_user"
-        android:layout_alignEnd="@+id/textView_user" />
-
-    <TextView
-        android:text="Medium Text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/home_password"
         android:layout_below="@+id/home_name"
         android:layout_centerHorizontal="true" />
@@ -160,4 +150,23 @@
         android:id="@+id/textView_sys"
         android:layout_below="@+id/home_value"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="wel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/home_password"
+        android:layout_alignRight="@+id/textView_data"
+        android:layout_alignEnd="@+id/textView_data"
+        android:id="@+id/wel" />
+
+    <TextView
+        android:text="Medium Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:id="@+id/home_name"
+        android:layout_below="@+id/textView_user"
+        android:layout_toRightOf="@+id/wel"
+        android:layout_toEndOf="@+id/wel" />
 </RelativeLayout>
