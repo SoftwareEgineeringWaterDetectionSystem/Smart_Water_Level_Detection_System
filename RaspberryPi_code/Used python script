@@ -1,0 +1,3 @@
+water_system.py--run level detection
+start_pump.py--override pump control
+cleanup.py--kill all running script and release rpi gpio
